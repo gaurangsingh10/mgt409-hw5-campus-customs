@@ -1,0 +1,157 @@
+{
+  "run_at": "2026-10-11T17:33:31+00:00",
+  "transport": "stdio (MCP protocol), launched from HW5/.mcp.json",
+  "server": {
+    "name": "campus-customs",
+    "command": "/Users/gaurangsingh/Desktop/AI Foundation Class Folder/Homework/HW5/.venv/bin/python",
+    "args": [
+      "/Users/gaurangsingh/Desktop/AI Foundation Class Folder/Homework/HW5/mcp_server/server.py"
+    ]
+  },
+  "database": "data/campus_customs_new.db",
+  "tools_listed": [
+    "check_stock",
+    "get_lease_rent_status",
+    "quote_bulk_order"
+  ],
+  "all_passed": true,
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt": "Ticket 101: Tauhid Zaman wants a Classic Bulldog Tee (CC-TEE-WHITE) in size S. Do we have one in stock, and what other sizes could we offer?",
+      "tool": "check_stock",
+      "arguments": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-TEE-WHITE",
+        "name": "Classic Bulldog Tee",
+        "size": "S",
+        "qty_on_hand": 0,
+        "in_stock": false,
+        "location": "Aisle B",
+        "all_sizes": [
+          {
+            "size": "S",
+            "qty": 0
+          },
+          {
+            "size": "M",
+            "qty": 5
+          },
+          {
+            "size": "L",
+            "qty": 3
+          },
+          {
+            "size": "XL",
+            "qty": 2
+          }
+        ]
+      },
+      "db_check": {
+        "values_read_directly_from_db": {
+          "qty_on_hand": 0,
+          "location": "Aisle B",
+          "all_sizes": [
+            {
+              "size": "S",
+              "qty": 0
+            },
+            {
+              "size": "M",
+              "qty": 5
+            },
+            {
+              "size": "L",
+              "qty": 3
+            },
+            {
+              "size": "XL",
+              "qty": 2
+            }
+          ]
+        },
+        "matches_db": true,
+        "mismatches": {}
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt": "Ticket 102: Elm City Properties says rent is due in 2 days. How much is rent on lease 1, when exactly is it due, and can our cash cover it?",
+      "tool": "get_lease_rent_status",
+      "arguments": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "found": true,
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "shop_today": "2026-08-31",
+        "days_until_due": 2,
+        "overdue": false,
+        "notes": null,
+        "cash_accounts": [
+          {
+            "name": "checking",
+            "balance": 3400.0,
+            "date": "2026-08-31"
+          }
+        ],
+        "total_cash": 3400.0,
+        "cash_after_rent": 1000.0,
+        "can_cover_rent": true
+      },
+      "db_check": {
+        "values_read_directly_from_db": {
+          "monthly_rent": 2400.0,
+          "next_due": "2026-09-02",
+          "shop_today": "2026-08-31",
+          "total_cash": 3400.0
+        },
+        "matches_db": true,
+        "mismatches": {}
+      }
+    },
+    {
+      "ticket": 103,
+      "prompt": "Ticket 103: Yale AI Club wants 20 Basic Hoodies (CC-HOOD-NAVY) in size M with a bulk discount. What would that cost at list, what's our floor, and do we have enough?",
+      "tool": "quote_bulk_order",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M",
+        "qty": 20
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-HOOD-NAVY",
+        "name": "Basic Hoodie Big Yale",
+        "size": "M",
+        "qty_requested": 20,
+        "qty_on_hand": 8,
+        "shortfall": 12,
+        "list_price": 58.0,
+        "unit_cost": 22.0,
+        "unit_margin_at_list": 36.0,
+        "total_at_list": 1160.0,
+        "total_cost": 440.0,
+        "price_floor_per_unit": 22.0,
+        "max_discount_pct_before_loss": 62.1
+      },
+      "db_check": {
+        "values_read_directly_from_db": {
+          "unit_cost": 22.0,
+          "list_price": 58.0,
+          "qty_on_hand": 8
+        },
+        "matches_db": true,
+        "mismatches": {}
+      }
+    }
+  ]
+}

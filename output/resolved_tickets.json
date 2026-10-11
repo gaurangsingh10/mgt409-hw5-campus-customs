@@ -1,0 +1,437 @@
+{
+  "generated_from": [
+    "data/campus_customs_new.db",
+    "output/audit_trail.json"
+  ],
+  "run_date": "2026-10-11",
+  "shop_date": "2026-08-31",
+  "desk_officer": "Gaurang",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 160.0,
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "final_status": "resolved",
+      "team_run_id": "team-20261011T203216-1d44d8",
+      "outcome": "Size S tee is out of stock (M/L/XL available); the rush reprint is tied to overdue invoice 501. Invoice 501 ($840) paid on human approval, which unblocks the reprint (est. ~Sep 5). Reply offering a size swap or waiting approved.",
+      "agents_involved": [
+        "boss",
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "agents_not_called": [
+        "facilities"
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "inventory"
+        },
+        {
+          "from": "boss",
+          "to": "accounting"
+        },
+        {
+          "from": "boss",
+          "to": "customer_service"
+        }
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "called_by": null,
+          "summary": "Tauhid requested one CC-TEE-WHITE size S, but none are on hand; the exact reprint is tied to overdue invoice 501. Payment approval 1 and customer-reply approval 2 are pending, and I moved the ticket to awaiting approval. The $840 invoice plus $2,400 rent due Sep 2 would leave $160, below the $500 cash floor; the Sep 5 restock estimate is tentative until the invoice is resolved.",
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket",
+            "delegate",
+            "get_cash_position",
+            "update_ticket_status"
+          ],
+          "approvals_filed": [
+            1,
+            2
+          ],
+          "usage": {
+            "requests": 6,
+            "tool_calls": 8,
+            "input_tokens": 17793,
+            "output_tokens": 1285
+          }
+        },
+        {
+          "agent": "inventory",
+          "called_by": "boss",
+          "summary": "We cannot fill the requested CC-TEE-WHITE size S today: on-hand quantity is 0, so the shortfall is 1. An existing same-SKU/size reprint is tied to invoice 501, which is open and 3 days overdue; I did not file a duplicate restock. The apparel vendor's lead time is 5 days (Sep 5 estimate from Aug 31), but timing depends on resolving the overdue invoice.",
+          "tools_used": [
+            "check_stock",
+            "get_invoice",
+            "get_shop_date",
+            "list_vendors",
+            "list_approval_requests"
+          ],
+          "approvals_filed": [],
+          "usage": {
+            "requests": 2,
+            "tool_calls": 6,
+            "input_tokens": 4315,
+            "output_tokens": 705
+          }
+        },
+        {
+          "agent": "accounting",
+          "called_by": "boss",
+          "summary": "Invoice 501 is an open, unpaid $840 invoice for the rush reprint of the exact requested item and size, and is 3 days overdue. I filed a payment approval: paying it alone would reduce checking from $3,400 to $2,560, but paying it together with $2,400 rent due September 2 leaves $160, below the $500 cash floor; human review is needed.",
+          "tools_used": [
+            "get_invoice",
+            "get_cash_position",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            1
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 4,
+            "input_tokens": 6936,
+            "output_tokens": 679
+          }
+        },
+        {
+          "agent": "customer_service",
+          "called_by": "boss",
+          "summary": "Tauhid Zaman requested one CC-TEE-WHITE in size S, which is out of stock. I drafted a reply offering available sizes M, L, and XL and noting the tentative Sep 5 estimate is not confirmed; the customer_reply draft is waiting for human approval.",
+          "tools_used": [
+            "get_ticket",
+            "list_approval_requests",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            2
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 4,
+            "input_tokens": 7469,
+            "output_tokens": 835
+          }
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 1,
+          "kind": "pay_invoice",
+          "requested_by": "accounting",
+          "amount": 840.0,
+          "unit_price": null,
+          "qty": null,
+          "decision": "approved",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:32:46+00:00",
+          "note": null,
+          "payment": {
+            "id": 1,
+            "kind": "invoice",
+            "amount": 840.0,
+            "paid_at": "2026-10-11T20:32:46+00:00",
+            "approved_by": "Gaurang"
+          },
+          "cash_effect": -840.0
+        },
+        {
+          "approval_id": 2,
+          "kind": "customer_reply",
+          "requested_by": "customer_service",
+          "amount": null,
+          "unit_price": null,
+          "qty": null,
+          "decision": "approved",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:32:49+00:00",
+          "note": null,
+          "payment": null,
+          "cash_effect": 0.0
+        }
+      ],
+      "cash_change": -840.0,
+      "team_usage": {
+        "requests": 14,
+        "tool_calls": 18,
+        "input_tokens": 36513,
+        "output_tokens": 3504
+      },
+      "checking_after": 2560.0
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "final_status": "resolved",
+      "team_run_id": "team-20261011T203357-4f1bfc",
+      "outcome": "Landlord rent notice verified against lease 1 ($2,400 to Elm City Properties, due 2026-09-02). Rent paid on human approval; next rent due 2026-10-02. Checking dropped to $160, below the $500 floor.",
+      "agents_involved": [
+        "boss",
+        "facilities"
+      ],
+      "agents_not_called": [
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "facilities"
+        }
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "called_by": null,
+          "summary": "Lease rent of $2,400 is due September 2, matching the ticket\u2019s claim. Facilities filed rent-payment approval request 3; paying all obligations would leave $160 in checking, below the $500 floor, so decide whether to approve rent despite the shortfall. Ticket 102 is awaiting approval; no payment was made.",
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket",
+            "get_cash_position",
+            "delegate",
+            "update_ticket_status"
+          ],
+          "approvals_filed": [
+            3
+          ],
+          "usage": {
+            "requests": 5,
+            "tool_calls": 6,
+            "input_tokens": 12326,
+            "output_tokens": 916
+          }
+        },
+        {
+          "agent": "facilities",
+          "called_by": "boss",
+          "summary": "Lease 1 has monthly rent of $2,400 due 2026-09-02, two days after the shop date of 2026-08-31. The ticket\u2019s \u201cdue in 2 days\u201d claim matches the lease, and the requester name matches the landlord; the ticket contains no amount or payment-detail instructions to verify. Rent payment was submitted for approval, but paying it alongside all open obligations would leave checking at $160, below the $500 floor.",
+          "tools_used": [
+            "get_ticket",
+            "get_lease_rent_status",
+            "get_cash_position",
+            "list_approval_requests",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            3
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 6,
+            "input_tokens": 6676,
+            "output_tokens": 747
+          }
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 3,
+          "kind": "pay_rent",
+          "requested_by": "facilities",
+          "amount": 2400.0,
+          "unit_price": null,
+          "qty": null,
+          "decision": "approved",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:34:23+00:00",
+          "note": null,
+          "payment": {
+            "id": 2,
+            "kind": "rent",
+            "amount": 2400.0,
+            "paid_at": "2026-10-11T20:34:23+00:00",
+            "approved_by": "Gaurang"
+          },
+          "cash_effect": -2400.0
+        }
+      ],
+      "cash_change": -2400.0,
+      "team_usage": {
+        "requests": 8,
+        "tool_calls": 10,
+        "input_tokens": 19002,
+        "output_tokens": 1663
+      },
+      "checking_after": 160.0
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "final_status": "resolved",
+      "team_run_id": "team-20261011T203446-1425ca",
+      "outcome": "Yale AI Club wants 20 navy hoodies in M; 8 on hand, 12 short. 15% bulk price ($49.30 \u00d7 20 = $986) approved. 12-unit restock ($264) rejected because only $160 was left. Customer reply sent back for a redraft offering the 8 in stock.",
+      "agents_involved": [
+        "boss",
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "agents_not_called": [
+        "facilities"
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "inventory"
+        },
+        {
+          "from": "boss",
+          "to": "accounting"
+        },
+        {
+          "from": "boss",
+          "to": "customer_service"
+        }
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "called_by": null,
+          "summary": "Yale AI Club wants 20 navy, size M hoodies; only 8 are on hand, and completing the order requires a proposed 12-unit restock. The proposed 15% discount and customer reply are pending approval as well; the $264 restock would exceed the shop\u2019s $160 checking balance, so it cannot be approved without addressing the cash shortfall and $500 floor.",
+          "tools_used": [
+            "get_shop_date",
+            "get_ticket",
+            "get_cash_position",
+            "delegate",
+            "update_ticket_status"
+          ],
+          "approvals_filed": [
+            4,
+            5,
+            6
+          ],
+          "usage": {
+            "requests": 6,
+            "tool_calls": 8,
+            "input_tokens": 16992,
+            "output_tokens": 1317
+          }
+        },
+        {
+          "agent": "inventory",
+          "called_by": "boss",
+          "summary": "There are 8 of 20 requested CC-HOOD-NAVY size M hoodies available now, leaving a 12-unit shortfall. I requested approval to restock exactly 12 from the apparel reprint vendor; its 5-day lead time gives an estimated arrival of September 5, 2026, if approved and completed on schedule.",
+          "tools_used": [
+            "get_ticket",
+            "check_stock",
+            "list_vendors",
+            "get_shop_date",
+            "list_approval_requests",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            5
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 7,
+            "input_tokens": 6976,
+            "output_tokens": 812
+          }
+        },
+        {
+          "agent": "accounting",
+          "called_by": "boss",
+          "summary": "The standard 15% discount for a 20-unit order gives a proposed price of $49.30 each, or $986.00 total, with a positive $27.30 margin per unit. I filed price override approval request #4; only 8 units are on hand, so supplying all 20 depends on restocking 12.",
+          "tools_used": [
+            "quote_bulk_order",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            4
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 3,
+            "input_tokens": 6527,
+            "output_tokens": 510
+          }
+        },
+        {
+          "agent": "customer_service",
+          "called_by": "boss",
+          "summary": "Yale AI Club requested 20 navy hoodies in size M; 8 are currently available and the remaining 12 depend on a proposed restock. The proposed 15% discount ($49.30 each, $986 total) is also pending approval, and I filed a customer reply draft for human approval.",
+          "tools_used": [
+            "get_ticket",
+            "list_approval_requests",
+            "submit_approval_request"
+          ],
+          "approvals_filed": [
+            6
+          ],
+          "usage": {
+            "requests": 3,
+            "tool_calls": 4,
+            "input_tokens": 8800,
+            "output_tokens": 904
+          }
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 4,
+          "kind": "price_override",
+          "requested_by": "accounting",
+          "amount": 986.0,
+          "unit_price": 49.3,
+          "qty": 20,
+          "decision": "approved",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:35:55+00:00",
+          "note": "OK: 15% is within the 20+ unit guideline and above $22 cost. Applies to the units we deliver.",
+          "payment": null,
+          "cash_effect": 0.0
+        },
+        {
+          "approval_id": 5,
+          "kind": "restock_order",
+          "requested_by": "inventory",
+          "amount": 264.0,
+          "unit_price": null,
+          "qty": 12,
+          "decision": "rejected",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:35:51+00:00",
+          "note": "Not enough cash: checking is $160 after rent + invoice 501; $264 would overdraw. Revisit after the hoodie sale deposits.",
+          "payment": null,
+          "cash_effect": 0.0
+        },
+        {
+          "approval_id": 6,
+          "kind": "customer_reply",
+          "requested_by": "customer_service",
+          "amount": null,
+          "unit_price": null,
+          "qty": null,
+          "decision": "rejected",
+          "decided_by": "Gaurang",
+          "decided_at": "2026-10-11T20:36:00+00:00",
+          "note": "Redraft: the restock was declined for now, so this draft is out of date. Offer the 8 in stock at the approved $49.30 and follow up on the other 12.",
+          "payment": null,
+          "cash_effect": 0.0
+        }
+      ],
+      "cash_change": 0.0,
+      "team_usage": {
+        "requests": 15,
+        "tool_calls": 18,
+        "input_tokens": 39295,
+        "output_tokens": 3543
+      },
+      "checking_after": 160.0
+    }
+  ],
+  "cash_reconciles": true
+}

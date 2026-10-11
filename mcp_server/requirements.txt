@@ -1,0 +1,1 @@
+fastmcp>=2.10  # the server only; the project root requirements.txt installs everything

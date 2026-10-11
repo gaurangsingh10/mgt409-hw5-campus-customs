@@ -1,0 +1,19 @@
+# secrets: never commit the real key
+.env
+!.env.example
+!frontend/.env
+
+# environments & builds
+.venv/
+backend/.venv/
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+
+# OS / editor / temp
+.DS_Store
+*.tmp
+output/*.tmp
+data.zip
